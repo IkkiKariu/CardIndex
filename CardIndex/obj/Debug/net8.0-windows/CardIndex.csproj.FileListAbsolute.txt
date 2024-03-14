@@ -47,3 +47,8 @@ C:\Projects\CS\CardIndex\CardIndex\bin\Debug\net8.0-windows\Microsoft.Extensions
 C:\Projects\CS\CardIndex\CardIndex\bin\Debug\net8.0-windows\Npgsql.dll
 C:\Projects\CS\CardIndex\CardIndex\bin\Debug\net8.0-windows\CardIndex.DataAccess.Postgres.dll
 C:\Projects\CS\CardIndex\CardIndex\bin\Debug\net8.0-windows\CardIndex.DataAccess.Postgres.pdb
+C:\Projects\CS\CardIndex\CardIndex\obj\Debug\net8.0-windows\CardIndex.sourcelink.json
+C:\Projects\CS\CardIndex\CardIndex\obj\Debug\net8.0-windows\Views\VerifyAccessPermissionsWindow.g.cs
+C:\Projects\CS\CardIndex\CardIndex\obj\Debug\net8.0-windows\Views\VerifyAccessPermissionsWindow.baml
+C:\Projects\CS\CardIndex\CardIndex\obj\Debug\net8.0-windows\Views\CreateNewAdminWindow.g.cs
+C:\Projects\CS\CardIndex\CardIndex\obj\Debug\net8.0-windows\Views\CreateNewAdminWindow.baml

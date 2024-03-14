@@ -17,7 +17,7 @@ namespace CardIndex.DataAccess.Postgres.Repositories
             return new NpgsqlConnection($"Host={host};Username={username};Password={password};Database={database}");
         }
 
-        public IEnumerable<Employee> GetAll()
+        public IEnumerable<Employee>? GetAll()
         {
             using (var conn = InitConnection("localhost", "postgres", "0000", "card_index"))
             {
@@ -32,36 +32,43 @@ namespace CardIndex.DataAccess.Postgres.Repositories
 
                     var reader = cmd.ExecuteReader();
 
-                    while (reader.Read())
+                    if (reader.HasRows)
                     {
-                        var employee = new Employee();
+                        while (reader.Read())
+                        {
+                            var employee = new Employee();
 
-                        employee.Id = reader.GetInt32(0);
-                        employee.FirstName = reader.GetString(1);
-                        employee.MiddleName = reader.GetString(2);
-                        employee.LastName = reader.GetString(3);
-                        employee.BirthDate = reader.GetDateTime(4);
-                        employee.EmploymentDate = reader.GetDateTime(5);
-                        employee.Position = reader.GetString(6);
-                        employee.Department = reader.GetString(7);
+                            employee.Id = reader.GetInt32(0);
+                            employee.FirstName = reader.GetString(1);
+                            employee.MiddleName = reader.GetString(2);
+                            employee.LastName = reader.GetString(3);
+                            employee.BirthDate = reader.GetDateTime(4);
+                            employee.EmploymentDate = reader.GetDateTime(5);
+                            employee.Position = reader.GetString(6);
+                            employee.Department = reader.GetString(7);
 
-                        employees.Add(employee);
+                            employees.Add(employee);
+                        }
+
+                        return employees;
                     }
-
-                    return employees;
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
         }
 
-        public void SaveEmployee(Employee employee)
+        public void Save(Employee employee)
         {
             if (employee.Id == 0)
-                InsertEmployee(employee);
+                Insert(employee);
             else
-                UpdateEmployee(employee);
+                Update(employee);
         }
 
-        private void InsertEmployee(Employee employee)
+        public void Insert(Employee employee)
         {
             using(var conn = InitConnection("localhost", "postgres", "0000", "card_index"))
             {
@@ -86,7 +93,7 @@ namespace CardIndex.DataAccess.Postgres.Repositories
         }
 
 
-        private void UpdateEmployee(Employee employee)
+        public void Update(Employee employee)
         {
             using (var conn = InitConnection("localhost", "postgres", "0000", "card_index"))
             {
@@ -113,7 +120,7 @@ namespace CardIndex.DataAccess.Postgres.Repositories
         }
 
 
-        public void DeleteEmployee(int id)
+        public void Delete(int id)
         {
             using (var conn = InitConnection("localhost", "postgres", "0000", "card_index"))
             {
@@ -122,7 +129,7 @@ namespace CardIndex.DataAccess.Postgres.Repositories
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = $"DELETE FROM users WHERE id = @id";
+                    cmd.CommandText = $"DELETE FROM employee WHERE id = @id";
                     cmd.Parameters.AddWithValue("id", id);
                     int affectedRows = cmd.ExecuteNonQuery();
                 }

@@ -25,3 +25,12 @@ C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\CardIndex.DataAcces
 C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\CardIndex.DataAccess.File.dll
 C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\CardIndex.DataAccess.File.pdb
+C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\CardIndex.DataAccess.Postgres.deps.json
+C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\CardIndex.DataAccess.Postgres.runtimeconfig.json
+C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\CardIndex.DataAccess.Postgres.exe
+C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\Npgsql.dll
+C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\CardIndex.DataAccess.Postgres.dll
+C:\Projects\CS\CardIndex\CardIndex.Business\bin\Debug\net8.0\CardIndex.DataAccess.Postgres.pdb
+C:\Projects\CS\CardIndex\CardIndex.Business\obj\Debug\net8.0\CardIndex.Business.sourcelink.json

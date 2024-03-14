@@ -20,3 +20,4 @@ C:\Projects\CS\CardIndex\CardIndex.DataAccess.File\obj\Debug\net8.0\refint\CardI
 C:\Projects\CS\CardIndex\CardIndex.DataAccess.File\obj\Debug\net8.0\CardIndex.DataAccess.File.pdb
 C:\Projects\CS\CardIndex\CardIndex.DataAccess.File\obj\Debug\net8.0\CardIndex.DataAccess.File.genruntimeconfig.cache
 C:\Projects\CS\CardIndex\CardIndex.DataAccess.File\obj\Debug\net8.0\ref\CardIndex.DataAccess.File.dll
+C:\Projects\CS\CardIndex\CardIndex.DataAccess.File\obj\Debug\net8.0\CardIndex.DataAccess.File.sourcelink.json

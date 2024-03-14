@@ -22,3 +22,4 @@ C:\Projects\CS\CardIndex\CardIndex.DataAccess.Postgres\obj\Debug\net8.0\refint\C
 C:\Projects\CS\CardIndex\CardIndex.DataAccess.Postgres\obj\Debug\net8.0\CardIndex.DataAccess.Postgres.pdb
 C:\Projects\CS\CardIndex\CardIndex.DataAccess.Postgres\obj\Debug\net8.0\CardIndex.DataAccess.Postgres.genruntimeconfig.cache
 C:\Projects\CS\CardIndex\CardIndex.DataAccess.Postgres\obj\Debug\net8.0\ref\CardIndex.DataAccess.Postgres.dll
+C:\Projects\CS\CardIndex\CardIndex.DataAccess.Postgres\obj\Debug\net8.0\CardIndex.DataAccess.Postgres.sourcelink.json

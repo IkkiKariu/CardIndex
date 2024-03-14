@@ -45,7 +45,7 @@
                 <Button Content="Добавить" Margin="5" Padding="5" Click="AddButton_Click"/>
                 <Button x:Name="EditBtn" Content="Правка" Margin="5" Padding="5" IsEnabled="{Binding CanEdit}" Click="EditButton_Click"/>
                 <Button Content="Удалить" Margin="5" Padding="5" IsEnabled="{Binding CanDelete}" Click="DeleteButton_Click"/>
-                <Button Content="Init employee table" Margin="5" Padding="5" Click="InitTable_Click"/>
+                <Button Content="Добавить администратора" Margin="5" Padding="5" Click="AdminButton_Click"/>
             </StackPanel>
         </Grid>
     </DockPanel>

@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 using CardIndex.Business.Models;
 using CardIndex.Core.Entities;
 using CardIndex.DataAccess.File.Repositories;
+using CardIndex.DataAccess.Postgres.Repositories;
+
 
 namespace CardIndex.Business.Services
 {
     public class EmployeeService
     {
         private readonly EmployeeStorage _storage = new EmployeeStorage();
+
+        private EmployeeRepository _employeeRepository = new EmployeeRepository();
+
 
         public EmployeeService() 
         {
@@ -25,7 +30,7 @@ namespace CardIndex.Business.Services
 
         private void InitializeStorage()
         {
-            _storage.Employees.Add(new Employee
+            /*_storage.Employees.Add(new Employee
             {
                 Id = 1,
                 FirstName = "Андрей",
@@ -59,7 +64,27 @@ namespace CardIndex.Business.Services
                 Position = "Руководитель группы",
                 Department = "Отдел тестирования",
                 EmploymentDate = new DateTime(2021, 11, 18),
-            });
+            });*/
+
+            var employees = _employeeRepository.GetAll();
+
+            if (employees == null)
+                return;
+
+            foreach (var employee in employees)
+            {
+                _storage.Employees.Add(new Employee
+                {
+                    Id = employee.Id,
+                    FirstName = employee.FirstName,
+                    MiddleName = employee.MiddleName,
+                    LastName = employee.LastName,
+                    BirthDate = employee.BirthDate,
+                    Position = employee.Position,
+                    Department = employee.Department,
+                    EmploymentDate = employee.EmploymentDate,
+                });
+            }
 
             EmployeeStorage.MaxID = _storage.Employees.Max(e => e.Id);
         }
@@ -68,6 +93,8 @@ namespace CardIndex.Business.Services
         {
             if (employee.Id == 0)
             {
+                _employeeRepository.Insert(employee);
+
                 EmployeeStorage.MaxID++;
                 employee.Id = EmployeeStorage.MaxID;
                 _storage.Employees.Add(employee);
@@ -79,6 +106,8 @@ namespace CardIndex.Business.Services
                 {
                     throw new IndexOutOfRangeException();
                 }
+
+                _employeeRepository.Update(employee);
 
                 existingEmployee.FirstName = employee.FirstName;
                 existingEmployee.LastName = employee.LastName;
@@ -97,6 +126,8 @@ namespace CardIndex.Business.Services
             {
                 throw new IndexOutOfRangeException();
             }
+
+            _employeeRepository.Delete(employeeId);
 
             _storage.Employees.Remove(existingEmployee);
         }

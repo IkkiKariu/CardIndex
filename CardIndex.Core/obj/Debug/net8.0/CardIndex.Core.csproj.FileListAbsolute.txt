@@ -12,3 +12,4 @@ C:\Projects\CS\CardIndex\CardIndex.Core\obj\Debug\net8.0\refint\CardIndex.Core.d
 C:\Projects\CS\CardIndex\CardIndex.Core\obj\Debug\net8.0\CardIndex.Core.pdb
 C:\Projects\CS\CardIndex\CardIndex.Core\obj\Debug\net8.0\CardIndex.Core.genruntimeconfig.cache
 C:\Projects\CS\CardIndex\CardIndex.Core\obj\Debug\net8.0\ref\CardIndex.Core.dll
+C:\Projects\CS\CardIndex\CardIndex.Core\obj\Debug\net8.0\CardIndex.Core.sourcelink.json

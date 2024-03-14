@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CardIndex.Core\CardIndex.Core.csproj" />
     <ProjectReference Include="..\CardIndex.DataAccess.File\CardIndex.DataAccess.File.csproj" />
+    <ProjectReference Include="..\CardIndex.DataAccess.Postgres\CardIndex.DataAccess.Postgres.csproj" />
   </ItemGroup>
 
 </Project>

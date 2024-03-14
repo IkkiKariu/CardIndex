@@ -57,7 +57,8 @@
       "CardIndex.Business/1.0.0": {
         "dependencies": {
           "CardIndex.Core": "1.0.0",
-          "CardIndex.DataAccess.File": "1.0.0"
+          "CardIndex.DataAccess.File": "1.0.0",
+          "CardIndex.DataAccess.Postgres": "1.0.0"
         },
         "runtime": {
           "CardIndex.Business.dll": {}

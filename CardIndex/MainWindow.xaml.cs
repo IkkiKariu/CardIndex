@@ -44,37 +44,48 @@ namespace CardIndex
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ViewModel.UpdateButtons();
-
-            //EditBtn.Content = ViewModel.SelectedEmployee.FirstName;
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new AddEmployeeWindow();
-            ViewModel.EditEmployee(window);
-            if(window.ShowDialog() == true)
-            {   
-                ViewModel.SaveEmployee(window);
+            var permissionAccessWindow = new VerifyAccessPermissionsWindow();
+            if (permissionAccessWindow.ShowDialog() == true)
+            {
+                if (ViewModel._authenticationService.Authenticate(permissionAccessWindow.adminName.Text, permissionAccessWindow.adminPassword.Text))
+                {
+                    var window = new AddEmployeeWindow();
+                    ViewModel.EditEmployee(window);
+                    if (window.ShowDialog() == true)
+                    {
+                        ViewModel.SaveEmployee(window);
+                    }
+                }
+                    
             }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.DeleteSelectedItem();
+            var permissionAccessWindow = new VerifyAccessPermissionsWindow();
+            if(permissionAccessWindow.ShowDialog() == true)
+            {
+                if(ViewModel._authenticationService.Authenticate(permissionAccessWindow.adminName.Text, permissionAccessWindow.adminPassword.Text))
+                    ViewModel.DeleteSelectedItem();
+            }
         }
 
         private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new OpenFileDialog { Filter = FileNameFilter };
+            /*var dlg = new OpenFileDialog { Filter = FileNameFilter };
             if (dlg.ShowDialog() == true)
             {
                 ViewModel.Open(dlg.FileName);
-            }
+            }*/
         }
 
         private void SaveMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if(ViewModel.HasFileName)
+            /*if(ViewModel.HasFileName)
             {
                 ViewModel.Save();
             }
@@ -85,17 +96,17 @@ namespace CardIndex
                 {
                     ViewModel.SaveAs(dlg.FileName);
                 }
-            }
+            }*/
         }
 
         private void SaveAsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new SaveFileDialog { Filter = FileNameFilter };
+            /*var dlg = new SaveFileDialog { Filter = FileNameFilter };
 
             if (dlg.ShowDialog() == true)
             {
                 ViewModel.SaveAs(dlg.FileName);
-            }
+            }*/
         }
 
         private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
@@ -103,9 +114,14 @@ namespace CardIndex
             Close();
         }
 
-        private void InitTable_Click(object sender, RoutedEventArgs e)
+        private void AdminButton_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeRepository.CreateEmployeeTable();
+            var adminCreatingWindow = new CreateNewAdminWindow();
+
+            if(adminCreatingWindow.ShowDialog() == true)
+            {
+                ViewModel._adminService.Save(adminCreatingWindow.newAdminName.Text, adminCreatingWindow.newAdminPassword.Text);
+            }
         }
     }
 }

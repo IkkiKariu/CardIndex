@@ -14,7 +14,11 @@ namespace CardIndex.ViewModels
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
-        private EmployeeService _service = new EmployeeService();
+        public AuthenticationService _authenticationService = new AuthenticationService();
+
+        public AdminService _adminService = new AdminService();
+
+        private EmployeeService _employeeService = new EmployeeService();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -35,7 +39,7 @@ namespace CardIndex.ViewModels
 
         public void GetAllEmployees()
         {
-            var allEmployees = _service.GetAllEmployees();
+            var allEmployees = _employeeService.GetAllEmployees();
 
             Employees.Clear();
 
@@ -65,15 +69,15 @@ namespace CardIndex.ViewModels
         public void SaveEmployee(IEmployeeWindow window)
         {
             var employeeViewModel = window.ViewModel;
-            _service.SaveEmployee(new Employee
+            _employeeService.SaveEmployee(new Employee
             {
-                Id= employeeViewModel.Id,
-                FirstName = employeeViewModel.FirstName,
-                MiddleName = employeeViewModel.MiddleName,
-                LastName = employeeViewModel.LastName,
+                Id = employeeViewModel.Id,
+                FirstName = employeeViewModel.FirstName != null ? employeeViewModel.FirstName : "",
+                MiddleName = employeeViewModel.MiddleName != null ? employeeViewModel.MiddleName : "",
+                LastName = employeeViewModel.LastName != null ? employeeViewModel.LastName : "",
                 BirthDate = employeeViewModel.BirthDate,
-                Position = employeeViewModel.Position,
-                Department = employeeViewModel.Department,
+                Position = employeeViewModel.Position != null ? employeeViewModel.Position : "",
+                Department = employeeViewModel.Department != null ? employeeViewModel.Department : "",
                 EmploymentDate = employeeViewModel.EmploymentDate
             });
 
@@ -109,25 +113,25 @@ namespace CardIndex.ViewModels
             if (SelectedEmployee == null)
                 return;
 
-            _service.Delete(SelectedEmployee.Id);
+            _employeeService.Delete(SelectedEmployee.Id);
             GetAllEmployees();
         }
 
         public void Save()
         {
-            _service.Save(FileName);
+            _employeeService.Save(FileName);
         }
 
         public void SaveAs(string filename)
         {
             FileName = filename;
-            _service.Save(FileName);
+            _employeeService.Save(FileName);
         }
 
         public void Open(string filename)
         {
             FileName = filename;
-            _service.Open(FileName);
+            _employeeService.Open(FileName);
             GetAllEmployees();
         }
 
