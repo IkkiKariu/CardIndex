@@ -19,12 +19,46 @@ namespace CardIndex.DataAccess.Postgres.Repositories
 
         public IEnumerable<Employee> GetAll()
         {
-            return null;
+            using (var conn = InitConnection("localhost", "postgres", "0000", "card_index"))
+            {
+                conn.Open();
+
+                using(var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT * FROM employee";
+
+                    var employees = new List<Employee>();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var employee = new Employee();
+
+                        employee.Id = reader.GetInt32(0);
+                        employee.FirstName = reader.GetString(1);
+                        employee.MiddleName = reader.GetString(2);
+                        employee.LastName = reader.GetString(3);
+                        employee.BirthDate = reader.GetDateTime(4);
+                        employee.EmploymentDate = reader.GetDateTime(5);
+                        employee.Position = reader.GetString(6);
+                        employee.Department = reader.GetString(7);
+
+                        employees.Add(employee);
+                    }
+
+                    return employees;
+                }
+            }
         }
 
         public void SaveEmployee(Employee employee)
         {
-
+            if (employee.Id == 0)
+                InsertEmployee(employee);
+            else
+                UpdateEmployee(employee);
         }
 
         private void InsertEmployee(Employee employee)
@@ -45,18 +79,54 @@ namespace CardIndex.DataAccess.Postgres.Repositories
                     cmd.Parameters.AddWithValue("employment_date", employee.EmploymentDate);
                     cmd.Parameters.AddWithValue("position", employee.Position);
                     cmd.Parameters.AddWithValue("department", employee.Department);
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
 
+
         private void UpdateEmployee(Employee employee)
         {
+            using (var conn = InitConnection("localhost", "postgres", "0000", "card_index"))
+            {
+                conn.Open();
 
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "UPDATE employee SET first_name = @first_name, middle_name = @middle_name, last_name = @last_name, birth_date = @birth_date, " +
+                                      "employment_date = @employment_date, position = @position, department = @department WHERE id = @id";
+
+                    cmd.Parameters.AddWithValue("first_name", employee.FirstName);
+                    cmd.Parameters.AddWithValue("middle_name", employee.MiddleName);
+                    cmd.Parameters.AddWithValue("last_name", employee.LastName);
+                    cmd.Parameters.AddWithValue("birth_date", employee.BirthDate);
+                    cmd.Parameters.AddWithValue("employment_date", employee.EmploymentDate);
+                    cmd.Parameters.AddWithValue("position", employee.Position);
+                    cmd.Parameters.AddWithValue("department", employee.Department);
+                    cmd.Parameters.AddWithValue("id", employee.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
-        public void DeleteEmployee(int employeeId)
-        {
 
+        public void DeleteEmployee(int id)
+        {
+            using (var conn = InitConnection("localhost", "postgres", "0000", "card_index"))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = $"DELETE FROM users WHERE id = @id";
+                    cmd.Parameters.AddWithValue("id", id);
+                    int affectedRows = cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public static void CreateEmployeeTable()
